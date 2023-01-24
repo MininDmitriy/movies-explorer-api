@@ -9,6 +9,8 @@ const { handlerErrors } = require('./middlewares/hendlerErrors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const handlerCORS = require('./middlewares/handlerCORS');
 
+const { MONGO } = process.env;
+
 const PORT = 3000;
 
 const app = express();
@@ -31,7 +33,7 @@ app.use(errors());
 
 app.use(handlerErrors);
 
-mongoose.connect('mongodb://localhost:27017/bitfilmsdb', {
+mongoose.connect(MONGO, {
   useNewUrlParser: true,
 });
 
