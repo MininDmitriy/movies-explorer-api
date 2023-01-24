@@ -15,5 +15,5 @@
 
 Работа размещена в публичном репозитории [GitHub](https://github.com/MininDmitriy/movies-explorer-api).
 
-IP  158.160.2.236
+IP  51.250.28.9  
 Backend  https://api.dbminin.diplom.nomoredomains.rocks

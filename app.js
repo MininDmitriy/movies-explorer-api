@@ -9,7 +9,7 @@ const { handlerErrors } = require('./middlewares/hendlerErrors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const handlerCORS = require('./middlewares/handlerCORS');
 
-const { PORT } = process.env;
+const PORT = 3000;
 
 const app = express();
 
