@@ -1,12 +1,11 @@
 const routes = require('express').Router();
-const { celebrate, Joi } = require('celebrate');
-const validator = require('validator');
 const userRoutes = require('./users');
 const movieRoutes = require('./movies');
 const { message } = require('../helpers/constants');
 const { login, createUser } = require('../controllers/users');
 const NotFoundError = require('../errors/NotFoundError');
 const { checkAuth } = require('../middlewares/auth');
+const { validationLogin, validationCreateUser } = require('../utils/handlersvalidation');
 
 routes.get('/crash-test', () => {
   setTimeout(() => {
@@ -14,30 +13,9 @@ routes.get('/crash-test', () => {
   }, 0);
 });
 
-routes.post('/signin', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().custom((value, helpers) => {
-      if (validator.isEmail(value)) {
-        return value;
-      }
-      return helpers.message('Передан некорректный e-mail пользователя!');
-    }),
-    password: Joi.string().required().min(8),
-  }),
-}), login);
+routes.post('/signin', validationLogin, login);
 
-routes.post('/signup', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().custom((value, helpers) => {
-      if (validator.isEmail(value)) {
-        return value;
-      }
-      return helpers.message('Передан некорректный e-mail пользователя!');
-    }),
-    password: Joi.string().required().min(8),
-    name: Joi.string().min(2).max(30),
-  }),
-}), createUser);
+routes.post('/signup', validationCreateUser, createUser);
 
 routes.use('/users', checkAuth, userRoutes);
 

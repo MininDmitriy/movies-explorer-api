@@ -9,9 +9,7 @@ const { handlerErrors } = require('./middlewares/hendlerErrors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const handlerCORS = require('./middlewares/handlerCORS');
 
-const { MONGO } = process.env;
-
-const PORT = 3000;
+const { PORT, MONGO } = process.env;
 
 const app = express();
 
