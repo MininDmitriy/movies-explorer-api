@@ -19,7 +19,7 @@ routes.post('/signup', validationCreateUser, createUser);
 
 routes.use('/users', checkAuth, userRoutes);
 
-routes.use('/cards', checkAuth, movieRoutes);
+routes.use('/movies', checkAuth, movieRoutes);
 
 routes.use('*', (req, res, next) => next(new NotFoundError(message.errorNotFound.page)));
 
