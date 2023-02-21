@@ -7,7 +7,7 @@ const validationCreateMovie = celebrate({
     director: Joi.string().required(),
     duration: Joi.number().required(),
     year: Joi.string().required(),
-    description: Joi.string().required,
+    description: Joi.string().required(),
     image: Joi.string().required().custom((value, helpers) => {
       if (/^(http|https):\/\/[^ "]+$/.test(value)) {
         return value;
