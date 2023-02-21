@@ -20,8 +20,8 @@ const validationCreateMovie = celebrate({
       }
       return helpers.message('Передан некорректный URL-адрес карточки');
     }),
-    nameRu: Joi.string().required(),
-    nameEn: Joi.string().required(),
+    nameRU: Joi.string().required(),
+    nameEN: Joi.string().required(),
     thumbnail: Joi.string().required().custom((value, helpers) => {
       if (/^(http|https):\/\/[^ "]+$/.test(value)) {
         return value;
