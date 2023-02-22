@@ -1,6 +1,6 @@
 const allowedCors = [
-  'http://dbminin.students.nomoredomains.club',
-  'https://dbminin.students.nomoredomains.club',
+  'https://dbminin.diplom.nomoredomains.rocks',
+  'http://dbminin.diplom.nomoredomains.rocks',
   'http://localhost:3000',
   'https://localhost:3000',
 ];
