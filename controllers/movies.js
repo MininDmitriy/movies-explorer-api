@@ -5,7 +5,8 @@ const ForbiddenError = require('../errors/ForbiddenError');
 
 const getMovies = async (req, res, next) => {
   try {
-    const movies = await Movie.find({}).populate(['owner']);
+    const { _id } = req.user;
+    const movies = await Movie.find({ owner: _id }).populate(['owner']);
     return res.status(SUCCESS).json(movies);
   } catch (err) {
     return next(err);
