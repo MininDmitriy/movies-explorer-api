@@ -5,7 +5,8 @@ const ForbiddenError = require('../errors/ForbiddenError');
 
 const getMovies = async (req, res, next) => {
   try {
-    const movies = await Movie.find({}).populate(['owner']);
+    const { _id } = req.user;
+    const movies = await Movie.find({ owner: _id }).populate(['owner']);
     return res.status(SUCCESS).json(movies);
   } catch (err) {
     return next(err);
@@ -14,11 +15,8 @@ const getMovies = async (req, res, next) => {
 
 const createMovie = async (req, res, next) => {
   try {
-    const {
-      createdAt, country, director, duration,
-      year, description, image, trailerLink,
-      nameRU, nameEN, thumbnail, movieId, _id, owner,
-    } = await Movie.create({
+    const ownerId = req.user._id;
+    const movie = await Movie.create({
       country: req.body.country,
       director: req.body.director,
       duration: req.body.duration,
@@ -30,24 +28,9 @@ const createMovie = async (req, res, next) => {
       nameEN: req.body.nameEN,
       thumbnail: req.body.thumbnail,
       movieId: req.body.movieId,
-      owner: req.user._id,
+      owner: ownerId,
     });
-    return res.status(CREATED).json({
-      createdAt,
-      country,
-      director,
-      duration,
-      year,
-      description,
-      image,
-      trailerLink,
-      nameRU,
-      nameEN,
-      thumbnail,
-      movieId,
-      _id,
-      owner: { _id: owner },
-    });
+    return res.status(CREATED).json(movie);
   } catch (err) {
     return next(err);
   }
